@@ -27,7 +27,7 @@ pygame.mixer.music.load("assets/ironsound.mp3")
 
 branco = (255, 255, 255)
 preto = (0, 0, 0)
-
+amarelo = (255, 255, 0)
 
 def jogar(nome):
     pygame.mixer.Sound.play(missileSound)
@@ -51,6 +51,18 @@ def jogar(nome):
     alturaBuraco = 50
     dificuldade = 20
 
+    # Variáveis para o círculo amarelo pulsante
+    raio = 50
+    pulse = 1
+    maximo_raio = 60
+    minimo_raio = 40
+
+    # Variáveis para o círculo preto em movimento
+    posicaoXCirculoPreto = random.randint(0, 800)
+    posicaoYCirculoPreto = random.randint(0, 600)
+    movimentoXCirculoPreto = random.choice([-3, 3])
+    movimentoYCirculoPreto = random.choice([-3, 3])
+
     while True:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -73,7 +85,8 @@ def jogar(nome):
                 movimentoYPersona = 0
 
         posicaoXPersona += movimentoXPersona
-        
+        posicaoYPersona += movimentoYPersona
+
         if posicaoXPersona < 0:
             posicaoXPersona = 10
         elif posicaoXPersona > 550:
@@ -86,6 +99,21 @@ def jogar(nome):
         tela.fill(branco)
         tela.blit(fundo, (0, 0))
         tela.blit(celta, (posicaoXPersona, posicaoYPersona))
+
+        # Atualização do círculo amarelo pulsante
+        raio += pulse
+        if raio >= maximo_raio or raio <= minimo_raio:
+            pulse = -pulse
+        pygame.draw.circle(tela, amarelo, (700, 100), raio)
+
+        # Atualização do círculo preto em movimento
+        posicaoXCirculoPreto += movimentoXCirculoPreto
+        posicaoYCirculoPreto += movimentoYCirculoPreto
+        if posicaoXCirculoPreto < 0 or posicaoXCirculoPreto > 800:
+            movimentoXCirculoPreto = -movimentoXCirculoPreto
+        if posicaoYCirculoPreto < 0 or posicaoYCirculoPreto > 600:
+            movimentoYCirculoPreto = -movimentoYCirculoPreto
+        pygame.draw.circle(tela, preto, (posicaoXCirculoPreto, posicaoYCirculoPreto), 10)
 
         posicaoYMissel += velocidadeMissel
         if posicaoYMissel > 600:
