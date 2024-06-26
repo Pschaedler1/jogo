@@ -6,11 +6,11 @@ from tkinter import simpledialog
 pygame.init()
 
 relogio = pygame.time.Clock()
-icone = pygame.image.load("assets/icone2.png")
+icone = pygame.image.load("assets/icone.png")
 celta = pygame.image.load("assets/celta.png")
-fundo = pygame.image.load("assets/fundo2.png")
-fundoStart = pygame.image.load("assets/fundoStart2.png")
-fundoDead = pygame.image.load("assets/fundoDead3.png")
+fundo = pygame.image.load("assets/fundo.png")
+fundoStart = pygame.image.load("assets/fundoStart.png")
+fundoDead = pygame.image.load("assets/fundoDead.png")
 
 injecao = pygame.image.load("assets/injecao.png")
 buraco = pygame.image.load('assets/buraco.png')
