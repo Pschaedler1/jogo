@@ -6,7 +6,7 @@ from tkinter import simpledialog
 pygame.init()
 
 relogio = pygame.time.Clock()
-icone = pygame.image.load("assets/icone.png")
+icone = pygame.image.load("assets/icone2.png")
 celta = pygame.image.load("assets/celta.png")
 fundo = pygame.image.load("assets/fundo2.png")
 fundoStart = pygame.image.load("assets/fundoStart2.png")
@@ -16,7 +16,7 @@ injecao = pygame.image.load("assets/injecao.png")
 buraco = pygame.image.load('assets/buraco.png')
 tamanho = (800, 600)
 tela = pygame.display.set_mode(tamanho)
-pygame.display.set_caption("Iron Man do Marcão")
+pygame.display.set_caption("Celta Crash")
 pygame.display.set_icon(icone)
 missileSound = pygame.mixer.Sound("assets/missile.wav")
 explosaoSound = pygame.mixer.Sound("assets/explosao.wav")
@@ -101,7 +101,7 @@ def jogar(nome):
         if posicaoYBuraco > 600:
             posicaoYBuraco = -240
             pontos += 1
-            velocidadeBuraco += 1
+            velocidadeBuraco += 2
             posicaoXBuraco = random.randint(0, 800)
 
         tela.blit(buraco, (posicaoXBuraco, posicaoYBuraco))
