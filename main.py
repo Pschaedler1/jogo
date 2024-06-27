@@ -6,31 +6,31 @@ from tkinter import simpledialog
 pygame.init()
 
 relogio = pygame.time.Clock()
-icone = pygame.image.load("assets/icone.png")
-celta = pygame.image.load("assets/celta.png")
-fundo = pygame.image.load("assets/fundo.png")
-fundoStart = pygame.image.load("assets/fundoStart.png")
-fundoDead = pygame.image.load("assets/fundoDead.png")
+icone = pygame.image.load("Recursos/icone.png")
+celta = pygame.image.load("Recursos/celta.png")
+fundo = pygame.image.load("Recursos/fundo.png")
+fundoStart = pygame.image.load("Recursos/fundoStart.png")
+fundoDead = pygame.image.load("Recursos/fundoDead.png")
 
-injecao = pygame.image.load("assets/injecao.png")
-buraco = pygame.image.load('assets/buraco.png')
+injecao = pygame.image.load("Recursos/injecao.png")
+buraco = pygame.image.load('Recursos/buraco.png')
 tamanho = (800, 600)
 tela = pygame.display.set_mode(tamanho)
 pygame.display.set_caption("Celta Crash")
 pygame.display.set_icon(icone)
-missileSound = pygame.mixer.Sound("assets/missile.wav")
-explosaoSound = pygame.mixer.Sound("assets/explosao.wav")
+buracoSound = pygame.mixer.Sound("Recursos/danger.wav")
+batidaSound = pygame.mixer.Sound("Recursos/batida.wav")
 fonte = pygame.font.SysFont("comicsans", 28)
 fonteStart = pygame.font.SysFont("comicsans", 55)
 fonteMorte = pygame.font.SysFont("arial", 120)
-pygame.mixer.music.load("assets/ironsound.mp3")
+pygame.mixer.music.load("Recursos/Ronco.mp3")
 
 branco = (255, 255, 255)
 preto = (0, 0, 0)
 amarelo = (255, 255, 0)
 
 def jogar(nome):
-    pygame.mixer.Sound.play(missileSound)
+    pygame.mixer.Sound.play(buracoSound)
     pygame.mixer.music.play(-1)
     posicaoXPersona = 700
     posicaoYPersona = 450
@@ -52,10 +52,10 @@ def jogar(nome):
     dificuldade = 20
 
     # Variáveis para o círculo amarelo pulsante
-    raio = 50
-    pulse = 1
-    maximo_raio = 60
-    minimo_raio = 40
+    raio = 60
+    pulse = 0.2
+    maximo_raio = 70
+    minimo_raio = 50
 
     # Variáveis para o círculo preto em movimento
     posicaoXCirculoPreto = random.randint(0, 800)
@@ -75,15 +75,7 @@ def jogar(nome):
                 movimentoXPersona = 0
             elif evento.type == pygame.KEYUP and evento.key == pygame.K_LEFT:
                 movimentoXPersona = 0
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_UP:
-                movimentoYPersona = -10
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 10
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_UP:
-                movimentoYPersona = 0
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 0
-
+            
         posicaoXPersona += movimentoXPersona
         posicaoYPersona += movimentoYPersona
 
@@ -121,7 +113,7 @@ def jogar(nome):
             pontos += 1
             velocidadeMissel += 1
             posicaoXMissel = random.randint(0, 800)
-            pygame.mixer.Sound.play(missileSound)
+            pygame.mixer.Sound.play(buracoSound)
 
         tela.blit(injecao, (posicaoXMissel, posicaoYMissel))
 
@@ -157,7 +149,7 @@ def jogar(nome):
 
 def dead(nome, pontos):
     pygame.mixer.music.stop()
-    pygame.mixer.Sound.play(explosaoSound)
+    pygame.mixer.Sound.play(batidaSound)
 
     jogadas = {}
     try:
